@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Colaborador;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
-class ColaboradorController extends Controller
+class QuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class ColaboradorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Colaborador $colaborador)
+    public function show(Question $question)
     {
         //
     }
@@ -42,7 +42,7 @@ class ColaboradorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Colaborador $colaborador)
+    public function edit(Question $question)
     {
         //
     }
@@ -50,7 +50,7 @@ class ColaboradorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Colaborador $colaborador)
+    public function update(Request $request, Question $question)
     {
         //
     }
@@ -58,7 +58,7 @@ class ColaboradorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Colaborador $colaborador)
+    public function destroy(Question $question)
     {
         //
     }

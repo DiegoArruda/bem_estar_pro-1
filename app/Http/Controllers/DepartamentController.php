@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Opcao;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
-class OpcaoController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class OpcaoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Opcao $opcao)
+    public function show(Department $department)
     {
         //
     }
@@ -42,7 +42,7 @@ class OpcaoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Opcao $opcao)
+    public function edit(Department $department)
     {
         //
     }
@@ -50,7 +50,7 @@ class OpcaoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Opcao $opcao)
+    public function update(Request $request, Department $department)
     {
         //
     }
@@ -58,7 +58,7 @@ class OpcaoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Opcao $opcao)
+    public function destroy(Department $department)
     {
         //
     }

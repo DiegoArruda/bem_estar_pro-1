@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conteudos', function (Blueprint $table) {
+        Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
+            $table->string('title');
             $table->string('link');
-            $table->foreignId('conteudo_tipo_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('content_type_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conteudos');
+        Schema::dropIfExists('contents');
     }
 };

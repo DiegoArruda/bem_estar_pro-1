@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('opcaos', function (Blueprint $table) {
+        Schema::create('content_types', function (Blueprint $table) {
             $table->id();
-            $table->string('descricao');
-            $table->unsignedTinyInteger('peso');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('opcaos');
+        Schema::dropIfExists('content_types');
     }
 };

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Avaliacao;
+use App\Models\ContentType;
 use Illuminate\Http\Request;
 
-class AvaliacaoController extends Controller
+class ContentTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class AvaliacaoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Avaliacao $avaliacao)
+    public function show(ContentType $contentType)
     {
         //
     }
@@ -42,7 +42,7 @@ class AvaliacaoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Avaliacao $avaliacao)
+    public function edit(ContentType $contentType)
     {
         //
     }
@@ -50,7 +50,7 @@ class AvaliacaoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Avaliacao $avaliacao)
+    public function update(Request $request, ContentType $contentType)
     {
         //
     }
@@ -58,7 +58,7 @@ class AvaliacaoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Avaliacao $avaliacao)
+    public function destroy(ContentType $contentType)
     {
         //
     }

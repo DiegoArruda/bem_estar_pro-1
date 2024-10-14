@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('conteudo_tipos', function (Blueprint $table) {
+        Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->string('descricao');
+            $table->string('comment')->nullable();
+            $table->foreignId('employee_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('conteudo_tipos');
+        Schema::dropIfExists('tests');
     }
 };

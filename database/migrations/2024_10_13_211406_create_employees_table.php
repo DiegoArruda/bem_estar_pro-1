@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('colaboradors', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->date('data_nasc');
-            $table->enum('genero',['f','m']);
+            $table->string('name');
+            $table->date('date_birth');
+            $table->enum('gender',['f','m']);
             $table->string('email')->unique();
             $table->char('cpf', 11)->unique();
-            $table->string('foto')->nullable();
+            $table->string('photo')->nullable();
             $table->enum('status',['on','off']);
-            $table->foreignId('departamento_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('department_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
             $table->foreignId('user_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('colaboradors');
+        Schema::dropIfExists('employees');
     }
 };

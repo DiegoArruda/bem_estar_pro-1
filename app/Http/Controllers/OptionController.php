@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ConteudoTipo;
+use App\Models\Option;
 use Illuminate\Http\Request;
 
-class ConteudoTipoController extends Controller
+class OptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class ConteudoTipoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ConteudoTipo $conteudoTipo)
+    public function show(Option $option)
     {
         //
     }
@@ -42,7 +42,7 @@ class ConteudoTipoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ConteudoTipo $conteudoTipo)
+    public function edit(Option $option)
     {
         //
     }
@@ -50,7 +50,7 @@ class ConteudoTipoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ConteudoTipo $conteudoTipo)
+    public function update(Request $request, Option $option)
     {
         //
     }
@@ -58,7 +58,7 @@ class ConteudoTipoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ConteudoTipo $conteudoTipo)
+    public function destroy(Option $option)
     {
         //
     }

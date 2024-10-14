@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Conteudo;
+use App\Models\Test;
 use Illuminate\Http\Request;
 
-class ConteudoController extends Controller
+class TestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class ConteudoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Conteudo $conteudo)
+    public function show(Test $test)
     {
         //
     }
@@ -42,7 +42,7 @@ class ConteudoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Conteudo $conteudo)
+    public function edit(Test $test)
     {
         //
     }
@@ -50,7 +50,7 @@ class ConteudoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Conteudo $conteudo)
+    public function update(Request $request, Test $test)
     {
         //
     }
@@ -58,7 +58,7 @@ class ConteudoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Conteudo $conteudo)
+    public function destroy(Test $test)
     {
         //
     }
