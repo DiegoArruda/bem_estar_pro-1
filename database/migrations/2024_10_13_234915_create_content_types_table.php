@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ContentType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,19 @@ return new class extends Migration
             $table->string('description');
             $table->timestamps();
         });
+
+        // Inserir registros
+        ContentType::insert([
+            [
+                'description' => 'Artigo'
+            ],
+            [
+                'description' => 'Vídeo'
+            ],
+            [
+                'description' => 'Podcast'
+            ]
+        ]);
     }
 
     /**

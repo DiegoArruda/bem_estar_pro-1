@@ -38,7 +38,7 @@ return new class extends Migration
         });
 
         // Inserir um registro de usuário
-        User::create([
+        User::insert([
             'name' => 'Admin',
             'email' => 'admin@mail.com',
             'password' => bcrypt('123456')
