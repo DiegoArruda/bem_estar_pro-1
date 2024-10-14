@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->char('cpf', 11)->unique();
             $table->string('photo')->nullable();
+            $table->string('role');
             $table->enum('status',['on','off']);
             $table->foreignId('department_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
             $table->foreignId('user_id')->constrained()->onDelete('restrict')->onUpdate('restrict');
