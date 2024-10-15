@@ -9,14 +9,28 @@
 
 ## Requisitos
 
-- PHP 8,2 ou superior - [Xampp] (https://www.apachefriends.org/pt_br/index.html)
-- [Composer] (https://getcomposer.org/Composer-Setup.exe)
+- PHP 8.2 ou superior e Banco Mysql
+- Xampp: https://www.apachefriends.org/pt_br/index.html
+- Composer: https://getcomposer.org/Composer-Setup.exe
 
-## Configuração após clonar o projeto
+## Fork do projeto
 
-- Duplicar o arquivo ".env.examplo" e renomear para ".env"
-- Instalar as dependências com o comando: composer install
+- Faça um fork do projeto e clone para sua máquina
+
+## Configuração
+
+- Start os serviços do Xampp - Apache e MySQL
+- Abra o projeto no VS Code e em seguida o terminal integrado (Use o terminal Git Bash)
+- Instalar dependências - Comando: **composer install**
+- Duplicar o arquivo ".env.examplo" - Comando: **cp .env.examplo .env**
+- Gerar chave - Comando: **php artisan key:generate**
+- Gerar o banco dados - Comando: **php artisan migrate** (será criado o banco "bem_estar_app" no Mysql)
 
 ## Rodar o projeto
 
-Usar o comando: php artisan serve
+- Comando: **php artisan serve**
+- Será iniciado o servidor no IP: http://127.0.0.1:8000 (Para abrir no navegador, segure a tecla CTRL e clique no IP)
+
+## Protótipos de telas no Figma
+
+<p align="center"><a href="https://www.figma.com/design/99UrkDVcq8pHKaGzcCcH7F/Telas-BemEstar-PRO?node-id=2-40&t=U0jgYP70kBgBJY4h-1" target="_blank"><img src="https://i.ibb.co/strQSLH/Tela-Gest-o.png" width="600"></a></p>
