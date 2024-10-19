@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use Illuminate\Http\Request;
+use App\Models\Employee;
 
 class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $department = Department::where('name', 'like', '%' . $request->busca . '%')->orderBy('name', 'asc')->paginate(10);
+
+        $totalDepartment = Department::all()->count();
+
+        // Receber os dados do banco através
+        return view('admin.departments.index', compact('department', 'totalDepartment'));
     }
 
     /**
@@ -20,7 +26,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        $departments = Department::all()->sortBy('name');
+        return view('admin.$departments.create', compact('departments'));
     }
 
     /**
@@ -44,7 +51,16 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        $department = Department::find($department);
+
+        if (!$department) {
+            return back();
+        }
+
+        $departments = Department::all()->sortBy('nome');
+
+        return view('admin.employees.edit', compact('employee', 'departments'));
+
     }
 
     /**

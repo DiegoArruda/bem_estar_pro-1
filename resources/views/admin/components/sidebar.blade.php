@@ -15,7 +15,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-white btn btn-primary text-start">
+            <a href="{{ route('departments.index') }}" class="nav-link text-white btn btn-primary text-start">
                 <i class="bi bi-house-check me-2 fs-5"></i>Departamentos
             </a>
         </li>
@@ -30,11 +30,11 @@
             </a>
         </li>
         @can('type-user')
-        <li class="nav-item">
-            <a href="#" class="nav-link text-white btn btn-primary text-start">
-                <i class="bi bi-person-gear me-2 fs-5"></i>Usuários
-            </a>
-        </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-white btn btn-primary text-start">
+                    <i class="bi bi-person-gear me-2 fs-5"></i>Usuários
+                </a>
+            </li>
         @endcan
     </ul>
     <hr>
@@ -44,7 +44,8 @@
             {{-- <strong>{{ auth()->user()->name }}</strong> --}}
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            {{-- <li><a class="dropdown-item" href="{{ route('users.edit', auth()->user()->id) }}">Alterar dados</a></li> --}}
+            {{-- <li><a class="dropdown-item" href="{{ route('users.edit', auth()->user()->id) }}">Alterar dados</a>
+            </li> --}}
             <li>
                 <hr class="dropdown-divider">
             </li>
