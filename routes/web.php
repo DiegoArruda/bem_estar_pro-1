@@ -2,11 +2,22 @@
 
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DepartmentController;
 
 Route::get('/', function () {
     return view('admin.login.index');
 });
 
+
+Route::controller(DepartmentController::class)->group(function(){
+    Route::get('admin/departments', 'index')->name('departments.index');
+    Route::get('admin/departments/create', 'create')->name('departments.create');
+    Route::post('admin/departments', 'store')->name('departments.store');
+    Route::get('admin/departments/{id}/edit', 'edit')->name('departments.edit');
+    Route::put('admin/departments/{id}', 'update')->name('departments.update');
+    Route::delete('admin/departments/{id}', 'destroy')->name('departments.destroy');
+    Route::get('admin/departments/{id}', 'show')->name('departments.show');
+});
 
 Route::controller(EmployeeController::class)->group(function(){
     Route::get('admin/employees', 'index')->name('employees.index');
