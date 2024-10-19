@@ -1,12 +1,22 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\QuestionController;  
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('admin.login.index');
 });
-
+// Criando as Rotas das Questões
+Route::controller(QuestionController::class)->group(function(){
+    Route::get('admin/questions', 'index')->name('questions.index');
+    Route::get('admin/questions/create', 'create')->name('questions.create');
+    Route::post('admin/questions', 'store')->name('questions.store');
+    Route::get('admin/questions/{id}/edit', 'edit')->name('questions.edit');
+    Route::put('admin/questions/{id}', 'update')->name('questions.update');
+    Route::delete('admin/questions/{id}', 'destroy')->name('questions.destroy');
+    Route::get('admin/questions/{id}', 'show')->name('questions.show');
+});
 
 Route::controller(EmployeeController::class)->group(function(){
     Route::get('admin/employees', 'index')->name('employees.index');
