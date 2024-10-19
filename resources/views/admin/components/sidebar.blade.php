@@ -15,7 +15,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-white btn btn-primary text-start">
+            <a href="{{route('departments.index') }}" class="nav-link text-white btn btn-primary text-start">
                 <i class="bi bi-house-check me-2 fs-5"></i>Departamentos
             </a>
         </li>
