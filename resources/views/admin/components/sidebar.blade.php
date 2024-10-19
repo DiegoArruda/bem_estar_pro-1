@@ -20,7 +20,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-white btn btn-primary text-start">
+            <a href="{{ route('questions.index')}}" class="nav-link text-white btn btn-primary text-start">
                 <i class="bi bi-question-circle me-2 fs-5"></i>Questões
             </a>
         </li>
