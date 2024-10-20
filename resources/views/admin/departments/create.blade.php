@@ -1,17 +1,18 @@
 @extends('admin.layouts.default')
 
-@section('title', 'BemEstar Pro - Cadastro de Departamento')
+@section('title', 'BemEstar Pro - Criar Departamento')
 
 @section('content')
+    <h1 class="fs-2 mb-3">Criar Departamento</h1>
 
-    <h1 class="text-center">@if(isset($department))Editar @else Cadastrar @endif</h1> <hr>
+    <form class="row g-3" method="POST" action="{{ route('departments.store') }}">
+        @csrf
 
+        @include('admin.departments.partials.form')
 
-    <div class="col-8 m-auto">
-    <form name="formCad" id="formCad" method="POST" action="{{ route('departments.store')}}">
-          @csrf
-          <input class="form-control" type="text" name="name" id="name" placeholder="Nome do departamento">
-          <input class="btn btn-primary" type="submit" value="@if(isset($department))Editar @else Cadastrar @endif">
-       </form>
-</div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Criar</button>
+            <a href="{{ route('departments.index') }}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </form>
 @endsection

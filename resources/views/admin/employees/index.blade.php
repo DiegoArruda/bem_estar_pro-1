@@ -12,14 +12,14 @@
 
     <p>Total de funcionários: {{ $totalEmployees }}</p>
 
-    @if (Session::get('sucesso'))
-        <div class="alert alert-success text-center">{{ Session::get('sucesso') }}</div>
-    @endif
-
     <x-busca>
         <x-slot name="rota">{{ route('employees.index') }}</x-slot>
         <x-slot name="tipo">Buscar funcionário</x-slot>
     </x-busca>
+
+    @if (session('success'))
+        <div class="alert alert-success text-center"> {{ session('success') }}</div>
+    @endif
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -68,10 +68,10 @@
         @endif
     </div>
 
-    {{-- <style>
+    <style>
         .pagination{
             justify-content: center;
         }
     </style>
-    {{ $employees->links() }} --}}
+    {{ $employees->links() }}
 @endsection

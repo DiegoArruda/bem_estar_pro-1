@@ -13,9 +13,9 @@ class QuestionController extends Controller
     public function index(Request $request)
     {
 
-        $questions = Question::where('description', 'like','%'.$request->busca.'%')->orderBy('description', 'asc')->paginate(10);
+        $questions = Question::where('description', 'like','%'.$request->busca.'%')->orderBy('id', 'desc')->paginate(10);
         // Buscando todas as questões do banco de dados
-        $totalQuestions = Question::all()->count(); 
+        $totalQuestions = Question::all()->count();
         return view('admin.questions.index', compact('questions', 'totalQuestions'));
     }
 
@@ -43,7 +43,7 @@ class QuestionController extends Controller
         Question::create([
             'description' => $request->description,
             'status' => $request->status
-            
+
         ]);
 
         return redirect()->route('questions.index')->with('success', 'Questão criada com sucesso.');
@@ -99,10 +99,13 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy(int $id)
     {
-        // Excluir a questão
-        //$question->delete();
-       // return redirect()->route('questions.index')->with('success', 'Questão excluída com sucesso.');
+        $question = Question::find($id);
+
+        // Apagando o registro no banco de dados
+        $question->delete();
+
+        return redirect()->route('questions.index')->with('success','Questão exluída com sucesso.');
     }
 }

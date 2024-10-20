@@ -46,7 +46,7 @@ class EmployeeController extends Controller
         // Insert de dados do usuário no banco
         Employee::create($input);
 
-        return redirect()->route('employees.index')->with('sucesso','Funcionário cadastrado com sucesso');
+        return redirect()->route('employees.index')->with('success','Funcionário cadastrado com sucesso');
     }
 
     /**
@@ -84,7 +84,7 @@ class EmployeeController extends Controller
 
         $employee->fill($input);
         $employee->save();
-        return redirect()->route('employees.index')->with('sucesso','Funcionário alterado com sucesso!');
+        return redirect()->route('employees.index')->with('success','Funcionário alterado com sucesso!');
     }
 
     /**
@@ -97,6 +97,6 @@ class EmployeeController extends Controller
         // Apagando o registro no banco de dados
         $employee->delete();
 
-        return redirect()->route('employees.index')->with('sucesso','Funcionário exluído com sucesso.');
+        return redirect()->route('employees.index')->with('success','Funcionário exluído com sucesso.');
     }
 }
