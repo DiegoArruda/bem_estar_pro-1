@@ -5,6 +5,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DepartmentController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return view('admin.login.index');
 });
@@ -19,6 +20,17 @@ Route::controller(QuestionController::class)->group(function () {
     Route::get('admin/questions/{id}', 'show')->name('questions.show');
 });
 
+
+Route::controller(DepartmentController::class)->group(function () {
+    Route::get('admin/departments', 'index')->name('departments.index');
+    Route::get('admin/departments/create', 'create')->name('departments.create');
+    Route::post('admin/departments', 'store')->name('departments.store');
+    Route::get('admin/departments/{id}/edit', 'edit')->name('departments.edit');
+    Route::put('admin/departments/{id}', 'update')->name('departments.update');
+    Route::delete('admin/departments/{id}', 'destroy')->name('departments.destroy');
+    Route::get('admin/departments/{id}', 'show')->name('departments.show');
+});
+
 Route::controller(EmployeeController::class)->group(function () {
     Route::get('admin/employees', 'index')->name('employees.index');
     Route::get('admin/employees/create', 'create')->name('employees.create');
@@ -29,7 +41,3 @@ Route::controller(EmployeeController::class)->group(function () {
     Route::get('admin/employees/{id}', 'show')->name('employees.show');
 });
 
-Route::controller(DepartmentController::class)->group(function () {
-    Route::get('admin/departments', 'index')->name('departments.index');
-    Route::get('admin/departments/create', 'create')->name('departments.create');
-});

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use Illuminate\Http\Request;
-use App\Models\Employee;
 
 class DepartmentController extends Controller
 {
@@ -13,12 +12,12 @@ class DepartmentController extends Controller
      */
     public function index(Request $request)
     {
-        $department = Department::where('name', 'like', '%' . $request->busca . '%')->orderBy('name', 'asc')->paginate(10);
+        $departments = Department::where('name', 'like', '%' . $request->busca . '%')->orderBy('name', 'asc')->paginate(10);
 
-        $totalDepartment = Department::all()->count();
+        $totalDepartments = Department::all()->count();
 
         // Receber os dados do banco através
-        return view('admin.departments.index', compact('department', 'totalDepartment'));
+        return view('admin.departments.index', compact('departments', 'totalDepartments'));
     }
 
     /**
