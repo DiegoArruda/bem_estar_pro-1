@@ -8,7 +8,7 @@
 
 
     <div class="col-8 m-auto">
-    <form name="formCad" id="formCad" method="POST" action="{{url('departments')}}">
+    <form name="formCad" id="formCad" method="POST" action="{{ route('departments.store')}}">
           @csrf
           <input class="form-control" type="text" name="name" id="name" placeholder="Nome do departamento">
           <input class="btn btn-primary" type="submit" value="@if(isset($department))Editar @else Cadastrar @endif">

@@ -35,28 +35,12 @@
             @foreach ($departments as $department)
                 <tr class="align-middle">
                     <th class="text-center" scope="row">{{$department->id}}</th>
-                    {{-- <td class="text-center">
-                        @if (@empty($employee->foto))
-                        <img src="/images/sombra_funcionario.jpg" alt="Foto" class="img-thumbnail" width="70">
-                        @else
-                        <img src="{{ url(" storage/employees/$employee->foto") }}" alt="Fotos" class="img-thumbnail"
-                        width="70">
-                        @endif
-                    </td> --}}
                     <td>{{ $department->name }}</td>
                     <td>
                         <a href="{{ route('departments.edit', $department->id) }}" title="Editar" class="btn btn-primary"><i
                                 class="bi bi-pen"></i></a>
                         <a href="" title="Deletar" class="btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#modal-delete-{{ $department->id }}"><i class="bi bi-trash"></i></a>
-                        {{-- Inseri o componente modal na view --}}
-                        <x-modalDelete>
-                            <x-slot name="id">{{ $department->id }}</x-slot>
-                            <x-slot name="tipo">departamento</x-slot>
-                            {{-- O que está acontecendo aqui? --}}
-                            <x-slot name="nome">{{ $departments->name}}</x-slot>
-                            <x-slot name="rota">departments.destroy</x-slot>
-                        </x-modalDelete>
                     </td>
                 </tr>
             @endforeach

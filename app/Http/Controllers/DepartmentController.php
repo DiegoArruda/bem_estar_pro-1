@@ -25,8 +25,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        $departments = Department::all()->sortBy('name');
-        return view('admin.$departments.create', compact('departments'));
+        return view('admin.departments.create');
     }
 
     /**
@@ -34,7 +33,11 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->toArray();
+
+        Department::create($input);
+
+        return redirect()->route('departments.index')->with('sucesso', 'Departamento cadastrado com sucesso');
     }
 
     /**
@@ -48,26 +51,36 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Department $department)
+    public function edit(int $id)
     {
-        $department = Department::find($department);
+        $department = Department::find($id);
 
         if (!$department) {
             return back();
         }
 
-        $departments = Department::all()->sortBy('nome');
-
-        return view('admin.employees.edit', compact('employee', 'departments'));
-
+        return view('admin.departments.edit', compact('department'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Department $department)
+    public function update(Request $request, int $id)
     {
-        //
+        //buscando questão
+        $department = Department::find($id);
+
+        // Validação dos dados
+        $request->validate([
+            'name' => 'required|string|max:255'
+        ]);
+
+        // Atualizar a questão
+        $department->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('departments.index')->with('success', 'Departamento atualizado com sucesso.');
     }
 
     /**
