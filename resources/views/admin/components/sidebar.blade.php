@@ -29,13 +29,11 @@
                 <i class="bi bi-star me-2 fs-5"></i>Conteúdo
             </a>
         </li>
-        @can('type-user')
             <li class="nav-item">
-                <a href="#" class="nav-link text-white btn btn-primary text-start">
+                <a href="{{ route('users.index')}}" class="nav-link text-white btn btn-primary text-start">
                     <i class="bi bi-person-gear me-2 fs-5"></i>Usuários
                 </a>
-            </li>
-        @endcan
+        </li>
     </ul>
     <hr>
     <div class="dropdown">

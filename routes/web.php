@@ -3,7 +3,9 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::get('/', function () {
@@ -41,3 +43,13 @@ Route::controller(EmployeeController::class)->group(function () {
     Route::get('admin/employees/{id}', 'show')->name('employees.show');
 });
 
+// Criando Rotas de Usuário
+Route::controller(UserController::class)->group(function () {
+    Route::get('admin/users', 'index')->name('users.index');
+    Route::get('admin/users/create', 'create')->name('users.create');
+    Route::post('admin/users', 'store')->name('users.store'); 
+    Route::get('admin/users/{id}/edit', 'edit')->name('users.edit');
+    Route::put('admin/users/{id}', 'update')->name('users.update');
+    Route::delete('admin/users/{id}', 'destroy')->name('users.destroy');
+    Route::get('admin/users/{id}', 'show')->name('users.show');
+});
