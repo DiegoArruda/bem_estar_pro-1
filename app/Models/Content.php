@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Content extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['title','link','content_type_id'];
+
+
+    public function contentType()
+    {
+
+        return $this->belongsTo(ContentType::class);
+    }
 }
