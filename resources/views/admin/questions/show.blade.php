@@ -3,7 +3,7 @@
 @section('title', 'BemEstar Pro - Visualizar Questão')
 
 @section('content')
-    <h1 class="fs-2 mb-3">Detalhes da Questão</h1>
+    <h1 class="fs-2 mb-4">Detalhes da Questão</h1>
 
     <div>
         <strong>Título:</strong> {{ $question->title }} <br>

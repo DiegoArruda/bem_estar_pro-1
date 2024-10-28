@@ -38,10 +38,6 @@ class ContentController extends Controller
         $input = $request->toArray();
         // dd($input);
 
-        //Armazena o id do usuário do sistema logado no cadastro do funcionário
-        $input['user_id'] = 1;
-        // $input['user_id'] = auth()->user()->id;
-
         $validatedData = $request->validate([
             'title' => 'required|string',
             'link' => 'required|string',

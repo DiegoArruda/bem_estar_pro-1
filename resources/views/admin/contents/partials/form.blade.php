@@ -8,7 +8,7 @@
 
     <input type="text" class="form-control" id="link" name="link" value="{{ old('link', $content->link ?? '') }}" required>
 </div>
-<div class="col-md-4">
+<div class="col-12">
     <label for="content_type_id" class="form-label">Tipos</label>
     <select id="content_type_id" name="content_type_id" class="form-select bg-light" required>
         <option value="">--</option>

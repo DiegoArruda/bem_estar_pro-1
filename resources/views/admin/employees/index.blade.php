@@ -8,7 +8,7 @@
         <x-slot name="title">Cadastrar Funcionário</x-slot>
     </x-btnCreate>
 
-    <h1 class="fs-2 mb-3">Funcionários</h1>
+    <h1 class="fs-2 mb-4">Funcionários</h1>
 
     <p>Total de funcionários: {{ $totalEmployees }}</p>
 

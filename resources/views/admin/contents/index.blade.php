@@ -8,7 +8,7 @@
         <x-slot name="title">Cadastrar Conteúdo</x-slot>
     </x-btnCreate>
 
-    <h1 class="fs-2 mb-3">Conteúdos</h1>
+    <h1 class="fs-2 mb-4">Conteúdos</h1>
 
     <p>Total de conteúdos: {{ $totalContents }}</p>
 

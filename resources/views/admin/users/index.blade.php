@@ -8,7 +8,7 @@
         <x-slot name="title">Cadastrar Usuário</x-slot>
     </x-btnCreate>
 
-    <h1 class="fs-2 mb-3">Usuários</h1>
+    <h1 class="fs-2 mb-4">Usuários</h1>
 
     <p>Total de usuários: {{ $totalUsers }}</p>
 
@@ -40,13 +40,15 @@
                         <td class="text-center">{{ $user->email }}</td>
                         <td>
                             <a href="{{ route('users.edit', $user->id) }}" title="Editar" class="btn btn-primary"><i class="bi bi-pen"></i></a>
-                            <a href="" title="Deletar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $user->id }}"><i class="bi bi-trash"></i></a>
-                            <x-modalDelete>
-                                <x-slot name="id">{{ $user->id }}</x-slot>
-                                <x-slot name="tipo">usuário</x-slot>
-                                <x-slot name="nome">{{ $user->name }}</x-slot>
-                                <x-slot name="rota">users.destroy</x-slot>
-                            </x-modalDelete>
+                            @if($user->id != 1)
+                                <a href="" title="Deletar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $user->id }}"><i class="bi bi-trash"></i></a>
+                                <x-modalDelete>
+                                    <x-slot name="id">{{ $user->id }}</x-slot>
+                                    <x-slot name="tipo">usuário</x-slot>
+                                    <x-slot name="nome">{{ $user->name }}</x-slot>
+                                    <x-slot name="rota">users.destroy</x-slot>
+                                </x-modalDelete>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
