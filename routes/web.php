@@ -4,6 +4,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -47,9 +48,19 @@ Route::controller(EmployeeController::class)->group(function () {
 Route::controller(UserController::class)->group(function () {
     Route::get('admin/users', 'index')->name('users.index');
     Route::get('admin/users/create', 'create')->name('users.create');
-    Route::post('admin/users', 'store')->name('users.store'); 
+    Route::post('admin/users', 'store')->name('users.store');
     Route::get('admin/users/{id}/edit', 'edit')->name('users.edit');
     Route::put('admin/users/{id}', 'update')->name('users.update');
     Route::delete('admin/users/{id}', 'destroy')->name('users.destroy');
     Route::get('admin/users/{id}', 'show')->name('users.show');
+});
+
+Route::controller(ContentController::class)->group(function(){
+    Route::get('admin/contents', 'index')->name('contents.index');
+    Route::get('admin/contents/create', 'create')->name('contents.create');
+    Route::post('admin/contents', 'store')->name('contents.store');
+    Route::get('admin/contents/{id}/edit', 'edit')->name('contents.edit');
+    Route::put('admin/contents/{id}', 'update')->name('contents.update');
+    Route::delete('admin/contents/{id}', 'destroy')->name('contents.destroy');
+    Route::get('admin/contents/{id}', 'show')->name('contents.show');
 });

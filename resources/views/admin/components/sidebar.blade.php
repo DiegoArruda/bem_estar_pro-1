@@ -25,7 +25,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link text-white btn btn-primary text-start">
+            <a href="{{ route('contents.index')}}" class="nav-link text-white btn btn-primary text-start">
                 <i class="bi bi-star me-2 fs-5"></i>Conteúdo
             </a>
         </li>
