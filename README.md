@@ -22,7 +22,7 @@ O sistem **BemEstar Pro** possibilita o monitoramento e apoio adequado à saúde
 - Start os serviços do Xampp - Apache e MySQL
 - Abra o projeto no VS Code e em seguida o terminal integrado (Use o terminal Git Bash)
 - Instalar dependências - Comando: **composer install**
-- Duplicar o arquivo ".env.examplo" - Comando: **cp .env.examplo .env**
+- Duplicar o arquivo ".env.examplo" - Comando: **cp .env.example .env**
 - Gerar chave - Comando: **php artisan key:generate**
 - Gerar o banco dados - Comando: **php artisan migrate** (será criado o banco "bem_estar_app" no Mysql)
 
