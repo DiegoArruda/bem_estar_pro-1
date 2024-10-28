@@ -15,20 +15,37 @@
     </style>
 </head>
 
-<body class="p-5">
+<body class="p-5 d-flex align-items-center">
     <div class="container" style="max-width: 500px;">
-        <div class="mb-3 mx-auto" style="max-width: 400px;">
-            <img src="/images/logo_bemestar.png" class="img-fluid" alt="Logo BemEstar Pro">
+        <div class="mb-4 mx-auto" style="max-width: 400px;">
+            <img src="/images/logo_bemestar_login_admin.png" class="img-fluid" alt="Logo BemEstar Pro">
         </div>
-        <form action="{{ route('employees.index') }}">
-            <div class="container bg-white rounded-4 p-5">
+
+        <form action="{{ route('admin.login.auth') }}" method="POST">
+            @csrf
+            <div class="container bg-white rounded-4 p-5 shadow">
+                @isset($_GET['msn'])
+                    <div class="alert alert-danger text-center p-2">Área restrita. Realize o login para acessar.</div>
+                @endisset
+
+                @if (session('error'))
+                    <div class="alert alert-danger text-center p-2">{{ session('error') }}</div>
+                @endif
+
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-warning text-center p-2">{{ $error }}</div>
+                    @endforeach
+                @endif
                 <div class="mb-3">
                     <label for="email" class="form-label fs-5">E-mail</label>
-                    <input type="email" class="form-control form-control-lg bg-light" id="eamil">
+                    <input type="email" name="email" class="form-control form-control-lg bg-light" id="email"
+                        required>
                 </div>
                 <div class="mb-3">
-                    <label for="senha" class="form-label fs-5">Senha</label>
-                    <input type="password" class="form-control form-control-lg bg-light" id="senha">
+                    <label for="password" class="form-label fs-5">Senha</label>
+                    <input type="password" name="password" class="form-control form-control-lg bg-light" id="password"
+                        required>
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary btn-lg ">Entrar</button>

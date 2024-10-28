@@ -4,21 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $users = User::where('name', 'like', '%' . $request->busca . '%')
-                    ->orderBy('name', 'asc')
-                    ->paginate(10);
+        /* Verifica se o usuário é admin através do GATE */
+        if (Gate::allows('admin')) {
+            $users = User::where('name', 'like', '%' . $request->busca . '%')
+                ->orderBy('name', 'asc')
+                ->paginate(10);
 
-        $totalUsers = User::count();
+            $totalUsers = User::count();
 
-        return view('admin.users.index', compact('users', 'totalUsers'));
+            return view('admin.users.index', compact('users', 'totalUsers'));
+        } else {
+            return back();
+        }
     }
 
     /**
@@ -38,7 +44,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:8'
+            'password' => 'required|string|min:6'
         ]);
 
         User::create([
@@ -53,10 +59,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
-    {
-       
-    }
+    public function show(User $user) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -69,7 +72,11 @@ class UserController extends Controller
             return back()->with('error', 'Usuário não encontrado.');
         }
 
-        return view('admin.users.edit', compact('user'));
+        if (auth()->user()->id == $user['id'] || auth()->user()->id == 1) {
+            return view('admin.users.edit', compact('user'));
+        } else {
+            return back();
+        }
     }
 
     /**
@@ -81,8 +88,8 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255' ,
-            'password' => 'nullable|string|min:8'
+            'email' => 'required|string|email|max:255',
+            'password' => 'nullable|string|min:6'
         ]);
 
         $user->update([
@@ -91,7 +98,11 @@ class UserController extends Controller
             'password' => $request->password ? bcrypt($request->password) : $user->password,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso.');
+        if(Gate::allows('admin')){
+            return redirect()->route('users.index')->with('success','Usuário alterado com sucesso!');
+        }else{
+            return redirect()->route('users.edit', $user->id)->with('success','Usuário alterado com sucesso!');
+        }
     }
 
     /**
@@ -109,4 +120,3 @@ class UserController extends Controller
         return back()->with('error', 'Usuário não encontrado.');
     }
 }
-
