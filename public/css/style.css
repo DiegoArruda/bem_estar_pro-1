@@ -2,3 +2,37 @@
     max-width: 600px;
     margin: 0 auto;
 }
+
+.group-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.option {
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.option:hover {
+    background-color: #aaf6fc;
+}
+
+.option span {
+    font-weight: bold;
+}
+
+.option input {
+    display: none;
+}
+
+.option:has(input[type="radio"]:checked){
+    background-color: #aaf6fc;
+}

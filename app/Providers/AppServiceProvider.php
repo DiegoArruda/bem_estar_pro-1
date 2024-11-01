@@ -31,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('admin.components.sidebar', 'sidebar');
         Blade::component('admin.components.busca', 'busca');
         Blade::component('admin.components.modal-delete', 'modalDelete');
+        Blade::component('home.components.navbar', 'navbar');
+        Blade::component('home.components.aside', 'aside');
         Paginator::useBootstrapFive();
         Paginator::useBootstrapFour();
     }

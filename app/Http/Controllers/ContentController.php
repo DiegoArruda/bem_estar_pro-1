@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
+    public function list(Request $request)
+    {
+        $contents = Content::where('title', 'like','%'.$request->busca.'%')->orderBy('title', 'asc')->paginate(10);
+
+        $totalContents = Content::all()->count();
+
+        // Receber os dados do banco através
+        return view('home.contents.index', compact('contents', 'totalContents'));
+    }
+
     /**
      * Display a listing of the resource.
      */

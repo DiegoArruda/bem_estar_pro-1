@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Option;
+use App\Models\Question;
 use App\Models\Test;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,10 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+        $questions = Question::where('status', 'on')->orderBy('id', 'desc')->get();
+        $options = Option::query()->orderBy('weight', 'desc')->get();
+
+        return view('home.tests.index', compact('questions', 'options'));
     }
 
     /**

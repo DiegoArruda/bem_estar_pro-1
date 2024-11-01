@@ -7,14 +7,27 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LoginEmployeeController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
+// Login da área funcionário
+Route::get('/', [LoginEmployeeController::class, 'index'])->name('home.login.index');
 
-Route::get('/', [LoginController::class, 'index'])->name('admin.login.index');
-Route::post('/auth', [LoginController::class, 'auth'])->name('admin.login.auth');
-Route::get('/logout', [LoginController::class, 'logout'])->name('admin.login.logout');
+Route::prefix('home')->group(function () {
+    Route::post('auth', [LoginEmployeeController::class, 'auth'])->name('home.login.auth');
+    Route::get('logout', [LoginEmployeeController::class, 'logout'])->name('home.login.logout');
+    Route::get('tests', [TestController::class, 'index'])->name('home.tests.index');
+    Route::post('tests', [TestController::class, 'store'])->name('home.tests.store');
+    Route::get('contents', [ContentController::class, 'list'])->name('home.contents.index');
+});
 
-Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+// Login da área admim
+Route::get('admin', [LoginController::class, 'index'])->name('admin.login.index');
+Route::post('admin/auth', [LoginController::class, 'auth'])->name('admin.login.auth');
+Route::get('admin/logout', [LoginController::class, 'logout'])->name('admin.login.logout');
+
+Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('verifyuser');
 
 Route::controller(QuestionController::class)->middleware('verifyuser')->group(function () {
     Route::get('admin/questions', 'index')->name('questions.index');
@@ -42,7 +55,7 @@ Route::controller(EmployeeController::class)->middleware('verifyuser')->group(fu
     Route::post('admin/employees', 'store')->name('employees.store');
     Route::get('admin/employees/{id}/edit', 'edit')->name('employees.edit');
     Route::put('admin/employees/{id}', 'update')->name('employees.update');
-    Route::delete('/employees/{id}', 'destroy')->name('employees.destroy');
+    Route::delete('admin/employees/{id}', 'destroy')->name('employees.destroy');
     Route::get('admin/employees/{id}', 'show')->name('employees.show');
 });
 

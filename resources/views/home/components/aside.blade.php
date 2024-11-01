@@ -1,0 +1,1 @@
+<a href="{{ route('home.contents.index') }}"><img src="/images/banner_content.png" class="img-fluid"></a>

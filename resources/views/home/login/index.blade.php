@@ -21,7 +21,7 @@
             <img src="/images/logo_bemestar.png" class="img-fluid" alt="Logo BemEstar Pro">
         </div>
 
-        <form action="{{ route('login.auth') }}" method="POST">
+        <form action="{{ route('home.login.auth') }}" method="POST">
             @csrf
             <div class="container bg-white rounded-4 p-5 shadow">
                 @isset($_GET['msn'])
@@ -38,14 +38,8 @@
                     @endforeach
                 @endif
                 <div class="mb-3">
-                    <label for="email" class="form-label fs-5">E-mail</label>
-                    <input type="email" name="email" class="form-control form-control-lg bg-light" id="email"
-                        required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label fs-5">Senha</label>
-                    <input type="password" name="password" class="form-control form-control-lg bg-light" id="password"
-                        required>
+                    <label for="cpf" class="form-label fs-5">CPF</label>
+                    <input type="text" name="cpf" class="form-control form-control-lg bg-light" placeholder="Somente números" id="cpf" required>
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary btn-lg ">Entrar</button>
