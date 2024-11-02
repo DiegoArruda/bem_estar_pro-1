@@ -29,52 +29,52 @@ Route::get('admin/logout', [LoginController::class, 'logout'])->name('admin.logi
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('verifyuser');
 
-Route::controller(QuestionController::class)->middleware('verifyuser')->group(function () {
-    Route::get('admin/questions', 'index')->name('questions.index');
-    Route::get('admin/questions/create', 'create')->name('questions.create');
-    Route::post('admin/questions', 'store')->name('questions.store');
-    Route::get('admin/questions/{id}/edit', 'edit')->name('questions.edit');
-    Route::put('admin/questions/{id}', 'update')->name('questions.update');
-    Route::delete('admin/questions/{id}', 'destroy')->name('questions.destroy');
-    Route::get('admin/questions/{id}', 'show')->name('questions.show');
+Route::prefix('admin')->controller(QuestionController::class)->middleware('verifyuser')->group(function () {
+    Route::get('questions', 'index')->name('questions.index');
+    Route::get('questions/create', 'create')->name('questions.create');
+    Route::post('questions', 'store')->name('questions.store');
+    Route::get('questions/{id}/edit', 'edit')->name('questions.edit');
+    Route::put('questions/{id}', 'update')->name('questions.update');
+    Route::delete('questions/{id}', 'destroy')->name('questions.destroy');
+    Route::get('questions/{id}', 'show')->name('questions.show');
 });
 
-Route::controller(DepartmentController::class)->middleware('verifyuser')->group(function () {
-    Route::get('admin/departments', 'index')->name('departments.index');
-    Route::get('admin/departments/create', 'create')->name('departments.create');
-    Route::post('admin/departments', 'store')->name('departments.store');
-    Route::get('admin/departments/{id}/edit', 'edit')->name('departments.edit');
-    Route::put('admin/departments/{id}', 'update')->name('departments.update');
-    Route::delete('admin/departments/{id}', 'destroy')->name('departments.destroy');
-    Route::get('admin/departments/{id}', 'show')->name('departments.show');
+Route::prefix('admin')->controller(DepartmentController::class)->middleware('verifyuser')->group(function () {
+    Route::get('departments', 'index')->name('departments.index');
+    Route::get('departments/create', 'create')->name('departments.create');
+    Route::post('departments', 'store')->name('departments.store');
+    Route::get('departments/{id}/edit', 'edit')->name('departments.edit');
+    Route::put('departments/{id}', 'update')->name('departments.update');
+    Route::delete('departments/{id}', 'destroy')->name('departments.destroy');
+    Route::get('departments/{id}', 'show')->name('departments.show');
 });
 
-Route::controller(EmployeeController::class)->middleware('verifyuser')->group(function () {
-    Route::get('admin/employees', 'index')->name('employees.index');
-    Route::get('admin/employees/create', 'create')->name('employees.create');
-    Route::post('admin/employees', 'store')->name('employees.store');
-    Route::get('admin/employees/{id}/edit', 'edit')->name('employees.edit');
-    Route::put('admin/employees/{id}', 'update')->name('employees.update');
-    Route::delete('admin/employees/{id}', 'destroy')->name('employees.destroy');
-    Route::get('admin/employees/{id}', 'show')->name('employees.show');
+Route::prefix('admin')->controller(EmployeeController::class)->middleware('verifyuser')->group(function () {
+    Route::get('employees', 'index')->name('employees.index');
+    Route::get('employees/create', 'create')->name('employees.create');
+    Route::post('employees', 'store')->name('employees.store');
+    Route::get('employees/{id}/edit', 'edit')->name('employees.edit');
+    Route::put('employees/{id}', 'update')->name('employees.update');
+    Route::delete('employees/{id}', 'destroy')->name('employees.destroy');
+    Route::get('employees/{id}', 'show')->name('employees.show');
 });
 
-Route::controller(UserController::class)->middleware('verifyuser')->group(function () {
-    Route::get('admin/users', 'index')->name('users.index');
-    Route::get('admin/users/create', 'create')->name('users.create');
-    Route::post('admin/users', 'store')->name('users.store');
-    Route::get('admin/users/{id}/edit', 'edit')->name('users.edit');
-    Route::put('admin/users/{id}', 'update')->name('users.update');
-    Route::delete('admin/users/{id}', 'destroy')->name('users.destroy');
-    Route::get('admin/users/{id}', 'show')->name('users.show');
+Route::prefix('admin')->controller(UserController::class)->middleware('verifyuser')->group(function () {
+    Route::get('users', 'index')->name('users.index');
+    Route::get('users/create', 'create')->name('users.create');
+    Route::post('users', 'store')->name('users.store');
+    Route::get('users/{id}/edit', 'edit')->name('users.edit');
+    Route::put('users/{id}', 'update')->name('users.update');
+    Route::delete('users/{id}', 'destroy')->name('users.destroy');
+    Route::get('users/{id}', 'show')->name('users.show');
 });
 
-Route::controller(ContentController::class)->middleware('verifyuser')->group(function(){
-    Route::get('admin/contents', 'index')->name('contents.index');
-    Route::get('admin/contents/create', 'create')->name('contents.create');
-    Route::post('admin/contents', 'store')->name('contents.store');
-    Route::get('admin/contents/{id}/edit', 'edit')->name('contents.edit');
-    Route::put('admin/contents/{id}', 'update')->name('contents.update');
-    Route::delete('admin/contents/{id}', 'destroy')->name('contents.destroy');
-    Route::get('admin/contents/{id}', 'show')->name('contents.show');
+Route::prefix('admin')->controller(ContentController::class)->middleware('verifyuser')->group(function(){
+    Route::get('contents', 'index')->name('contents.index');
+    Route::get('contents/create', 'create')->name('contents.create');
+    Route::post('contents', 'store')->name('contents.store');
+    Route::get('contents/{id}/edit', 'edit')->name('contents.edit');
+    Route::put('contents/{id}', 'update')->name('contents.update');
+    Route::delete('contents/{id}', 'destroy')->name('contents.destroy');
+    Route::get('contents/{id}', 'show')->name('contents.show');
 });
