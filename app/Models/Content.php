@@ -9,7 +9,7 @@ class Content extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','link','content_type_id'];
+    protected $fillable = ['id','title','link','content_type_id'];
 
 
     public function contentType()
