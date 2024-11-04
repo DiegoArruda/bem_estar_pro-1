@@ -9,43 +9,31 @@
         @csrf
         <div class="container" style="max-width: 800px">
                 <div class="bg-white rounded-4 p-md-5 p-4 mb-md-5 mb-4 shadow">
-                    <h2 class="fs-4 ">Título</h2>
-                    <div class="group-options">
-                        <label for="option-idQuestao-idOpcao" class="option">
-                            <input type="radio" value="" name="option-idQuestao" id="option-idQuestao-idOpcao" required>
-                            <img src="/images/icon_5.png">
-                            <span>Descricao</span>
-                        </label>
-                        <label for="option-idQuestao-idOpcao" class="option">
-                            <input type="radio" value="" name="option-idQuestao" id="option-idQuestao-idOpcao" required>
-                            <img src="/images/icon_4.png">
-                            <span>Descricao</span>
-                        </label>
-                        <label for="option-idQuestao-idOpcao" class="option">
-                            <input type="radio" value="" name="option-idQuestao" id="option-idQuestao-idOpcao" required>
-                            <img src="/images/icon_3.png">
-                            <span>Descricao</span>
-                        </label>
-                        <label for="option-idQuestao-idOpcao" class="option">
-                            <input type="radio" value="" name="option-idQuestao" id="option-idQuestao-idOpcao" required>
-                            <img src="/images/icon_2.png">
-                            <span>Descricao</span>
-                        </label>
-                        <label for="option-idQuestao-idOpcao" class="option">
-                            <input type="radio" value="" name="option-idQuestao" id="option-idQuestao-idOpcao" required>
-                            <img src="/images/icon_1.png">
-                            <span>Descricao</span>
-                        </label>
+                    @foreach ($questions as $question)
+                    <div class="container" style="max-width: 800px">
+                            <div class="bg-white rounded-4 p-md-5 p-4 mb-md-5 mb-4 shadow">
+                                <h2 class="fs-4 ">{{$question->description}}</h2>
+                                @foreach ($options as $option)
+                                <div class="group-options">
+                                    <label for="option_{{ $question->id }}_{{ $option->id }}" class="option">
+                                        <input type="radio" value="" name="question_{{ $question->id }}" id="option_{{ $question->id }}_{{ $option->id }}" required>
+                                        <img src="{{'/images/icon_' . $option->id . '.png' }}">
+                                        <span>{{$option->description}}</span>
+                                    </label>
+                                </div>
+                                @endforeach
+                            </div>
+
+                    @endforeach
+                    <div class="bg-white rounded-4 p-md-5 p-4 mb-md-5 mb-4 shadow">
+                        <label for="comment" class="form-label">Comentário</label>
+                        <textarea class="form-control" id="comment" name="comment" style="height: 100px"></textarea>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="text-center btn btn-lg btn-primary mb-5">Enviar</button>
                     </div>
                 </div>
-            <div class="bg-white rounded-4 p-md-5 p-4 mb-md-5 mb-4 shadow">
-                <label for="comment" class="form-label">Comentário</label>
-                <textarea class="form-control" id="comment" name="comment" style="height: 100px"></textarea>
-            </div>
-
-            <div class="d-grid">
-                <button type="submit" class="text-center btn btn-lg btn-primary mb-5">Enviar</button>
-            </div>
         </div>
     </form>
 @endsection
