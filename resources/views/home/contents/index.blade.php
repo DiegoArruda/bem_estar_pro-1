@@ -28,6 +28,7 @@
                     @endphp
                     <img src="{{ $imagePath }}" class="card-img-top" alt="{{ $content->title }}">
                     <div class="card-body">
+                        <p>{{ date('d/m/Y', strtotime($content->created_at)) }}</p>
                         <h5 class="card-title mb-3">{{ $content->title }}</h5>
                         {{-- Link dinâmico para o conteúdo --}}
                         <a href="{{ $content->link }}" class="btn btn-primary" target="_blank">Acessar</a>

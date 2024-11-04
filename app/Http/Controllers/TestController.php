@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Option;
 use App\Models\Question;
 use App\Models\Test;
+use App\Models\TestQuestion;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -33,7 +34,21 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $input['employee_id'] = session('id');
+        $test = Test::create($input);
+
+        $questions = Question::where('status', 'on')->orderBy('id', 'desc')->get();
+
+        foreach($questions AS $question){
+            $input['question_id'] = $input['question-'.$question->id];
+            $input['option_id'] = $input['question-option-'.$question->id];
+            $input['test_id'] = $test['id'];
+            // echo  $input['employee_id']."-".$input['question_id']."-".$input['option_id'].'<br>';
+            TestQuestion::create($input);
+        }
+
+        return redirect()->route('home.tests.index')->with('success', 'Avaliação realizada com sucesso!');
     }
 
     /**
