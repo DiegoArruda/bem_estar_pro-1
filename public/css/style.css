@@ -18,11 +18,18 @@
     padding: 20px;
     border-radius: 10px;
     cursor: pointer;
-    position: relative;
+}
+
+.option img {
+    transition: all 0.2s linear;
 }
 
 .option:hover {
     background-color: #aaf6fc;
+}
+
+.option:hover img {
+    transform: scale(1.1);
 }
 
 .option span {
@@ -35,4 +42,74 @@
 
 .option:has(input[type="radio"]:checked){
     background-color: #aaf6fc;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+}
+
+.dashboard .employee {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 10px 10px;
+    border-radius: 20px;
+    transition: all 0.2s linear;
+}
+
+.dashboard .employee i {
+    font-size: 4rem;
+}
+
+.dashboard .employee p {
+    margin: 0;
+}
+
+.dashboard .employee:hover {
+    transform: scale(1.05);
+}
+
+.muito_satisfeiro {
+    background-color: #68EC54;
+}
+
+.satisfeiro {
+    background-color: #43DFDF;
+}
+
+.neutro {
+    background-color: #FFD749;
+}
+
+.insatisfeito {
+    background-color: #FFAF65;
+}
+
+.muito_insatisfeito {
+    background-color: #FF6B6B;
+}
+
+.sem_avaliacao {
+    background-color: #DDD;
+}
+
+.legenda {
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.legenda li {
+    list-style: none;
+}
+
+.legenda li img {
+    width: 30px;
 }

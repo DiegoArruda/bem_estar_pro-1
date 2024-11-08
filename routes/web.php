@@ -27,7 +27,9 @@ Route::get('admin', [LoginController::class, 'index'])->name('admin.login.index'
 Route::post('admin/auth', [LoginController::class, 'auth'])->name('admin.login.auth');
 Route::get('admin/logout', [LoginController::class, 'logout'])->name('admin.login.logout');
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('verifyuser');
+Route::prefix('admin')->controller(DashboardController::class)->middleware('verifyuser')->group(function () {
+    Route::get('dashboard', 'index')->name('dashboard.index');
+});
 
 Route::prefix('admin')->controller(QuestionController::class)->middleware('verifyuser')->group(function () {
     Route::get('questions', 'index')->name('questions.index');
