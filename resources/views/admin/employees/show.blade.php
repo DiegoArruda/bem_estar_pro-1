@@ -18,12 +18,12 @@
                 </tr>
             </thead>
             <tbody>
-                    <tr class="align-middle">
-                        <th class="text-center">???</th>
-                        <td class="text-center">???</td>
-                        <td class="text-center">???</td>
-                        <td class="text-center">???</td>
-                    </tr>
+                <tr class="align-middle">
+                    <th class="text-center">???</th>
+                    <td class="text-center">???</td>
+                    <td class="text-center">???</td>
+                    <td class="text-center">???</td>
+                </tr>
             </tbody>
         </table>
     </section>
@@ -31,8 +31,35 @@
     <h2 class="fs-4 mb-4">Gráfico de avaliações</h2>
 
     <section class="grafico-avaliacoes mb-5 bg-light p-3 rounded-3">
-        Gráfico de linhas entra aqui
+        <canvas id="myChart" style="width: 100%; height: 300px;"></canvas>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                // Aqui entra as datas as avaliações do funcionário
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: 'Média',
+                    // Aqui entra a média de cada avaliação
+                    data: [5, 3, 4, 1, 2, 4],
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                }
+            }
+        });
+    </script>
 
     <h2 class="fs-4 mb-4">Histório de avaliações</h2>
 
@@ -48,31 +75,31 @@
             <tbody>
                 <tr class="align-middle">
                     <td>Como você avalia o seu estado emocional atualmente?</td>
-                    <td class="text-center">Satisfeito</td>
+                    <td><img src="/images/icon_5.png"> Muito Satisfeito</td>
                 </tr>
                 <tr class="align-middle">
                     <td>Qual é a sua percepção sobre o equilíbrio entre vida pessoal e profissional?</td>
-                    <td class="text-center">Satisfeito</td>
+                    <td><img src="/images/icon_4.png"> Satisfeito</td>
                 </tr>
                 <tr class="align-middle">
                     <td>Como você avalia o impacto do ambiente de trabalho na sua saúde mental?</td>
-                    <td class="text-center">Satisfeito</td>
+                    <td><img src="/images/icon_3.png"> Neutro</td>
                 </tr>
                 <tr class="align-middle">
                     <td>Como você avalia seu estado emocional ao final do expediente?</td>
-                    <td class="text-center">Satisfeito</td>
+                    <td><img src="/images/icon_2.png"> Insatisfeito</td>
                 </tr>
                 <tr class="align-middle">
                     <td>Como você avalia o seu nível de bem-estar com seu superior imediato?</td>
-                    <td class="text-center">Satisfeito</td>
+                    <td><img src="/images/icon_2.png"> Insatisfeito</td>
                 </tr>
                 <tr class="align-middle">
                     <td>Como você avalia o seu nível de bem-estar com a equipe?</td>
-                    <td class="text-center">Satisfeito</td>
+                    <td><img src="/images/icon_1.png"> Muito insatisfeito</td>
                 </tr>
                 <tr class="align-middle">
                     <td><b>Média</b></td>
-                    <td class="text-center"><b>0.0</b></td>
+                    <td><b>0.0</b></td>
                 </tr>
             </tbody>
         </table>

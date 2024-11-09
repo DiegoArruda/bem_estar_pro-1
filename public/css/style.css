@@ -113,3 +113,8 @@
 .legenda li img {
     width: 30px;
 }
+
+.historico-avaliacoes img {
+    width: 30px;
+    margin-right: 5px;
+}
