@@ -26,31 +26,38 @@
             <thead class="table-dark">
                 <tr class="text-center">
                     <th scope="col">ID</th>
-                    {{-- <th scope="col">Foto</th> --}}
                     <th scope="col">Título</th>
                     <th scope="col">Link</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col" width="110px">Ações</th>
+                    <th scope="col" width="150px">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($contents as $content)
                     <tr class="align-middle">
                         <th class="text-center" scope="row">{{ $content->id }}</th>
-                        {{-- <td class="text-center">
-                            @if (@empty($employee->foto))
-                                <img src="/images/sombra_funcionario.jpg" alt="Foto" class="img-thumbnail" width="70">
-                            @else
-                                <img src="{{ url("storage/employees/$employee->foto") }}" alt="Fotos" class="img-thumbnail" width="70">
-                            @endif
-                        </td> --}}
                         <td>{{ $content->title }}</td>
                         <td class="text-center">{{ $content->link }}</td>
                         <td class="text-center">{{ $content->contentType->description }}</td>
-                        <td>
-                            <a href="{{ route('contents.edit', $content->id) }}" title="Editar" class="btn btn-primary"><i class="bi bi-pen"></i></a>
-                            <a href="" title="Deletar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $content->id }}"><i class="bi bi-trash"></i></a>
-                            {{-- Inseri o componente modal na view --}}
+                        <td class="text-center">
+                            <!-- Botão para Editar -->
+                            <a href="{{ route('contents.edit', $content->id) }}" title="Editar" class="btn btn-primary">
+                                <i class="bi bi-pen"></i>
+                            </a>
+
+                            <!-- Botão para Deletar (com modal) -->
+                            <a href="" title="Deletar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $content->id }}">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                            <!-- Condição para exibir o botão de prévia apenas para vídeos -->
+                            @if($content->content_type_id === 2)
+                                <button onclick="showVideo('{{ $content->link }}')" title="Ver Vídeo" class="btn btn-info">
+                                    <img src="/images/video.png" alt="Prévia do vídeo" style="width: 20px; height: 20px;">
+                                </button>
+                            @endif
+
+                            <!-- Modal para confirmação de exclusão -->
                             <x-modalDelete>
                                 <x-slot name="id">{{ $content->id }}</x-slot>
                                 <x-slot name="tipo">conteúdo</x-slot>
@@ -68,10 +75,41 @@
         @endif
     </div>
 
+    <!-- Modal para exibir o vídeo -->
+    <div id="videoModal" class="modal fade" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalLabel">Ver Vídeo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <video id="videoPlayer" controls style="width: 100%;">
+                        <source src="" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
-        .pagination{
+        .pagination {
             justify-content: center;
         }
     </style>
+
     {{ $contents->links() }}
+
+    <script>
+        // Função para exibir o modal com o vídeo
+        function showVideo(link) {
+            // Define o link do vídeo no player do modal
+            document.getElementById('videoPlayer').src = link;
+            // Exibe o modal
+            var videoModal = new bootstrap.Modal(document.getElementById('videoModal'));
+            videoModal.show();
+        }
+    </script>
 @endsection
+
