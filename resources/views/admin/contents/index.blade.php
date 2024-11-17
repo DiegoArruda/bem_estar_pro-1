@@ -18,7 +18,7 @@
     </x-busca>
 
     @if (session('success'))
-        <div class="alert alert-success text-center"> {{ session('success') }}</div>
+        <div class="alert alert-success text-center">{{ session('success') }}</div>
     @endif
 
     <div class="table-responsive">
@@ -45,19 +45,19 @@
                                 <i class="bi bi-pen"></i>
                             </a>
 
-                            <!-- Botão para Deletar (com modal) -->
+                            <!-- Botão para Deletar -->
                             <a href="" title="Deletar" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-{{ $content->id }}">
                                 <i class="bi bi-trash"></i>
                             </a>
 
-                            <!-- Condição para exibir o botão de prévia apenas para vídeos -->
+                            <!-- Botão de prévia de vídeo -->
                             @if($content->content_type_id === 2)
-                                <button onclick="showVideo('{{ $content->link }}')" title="Ver Vídeo" class="btn btn-info">
-                                    <img src="/images/video.png" alt="Prévia do vídeo" style="width: 20px; height: 20px;">
+                                <button type="button" class="btn btn-info" title="Ver Vídeo" onclick="showVideo('{{ $content->link }}')">
+                                    <i class="bi bi-play-circle"></i>
                                 </button>
                             @endif
 
-                            <!-- Modal para confirmação de exclusão -->
+                            <!-- Modal de exclusão -->
                             <x-modalDelete>
                                 <x-slot name="id">{{ $content->id }}</x-slot>
                                 <x-slot name="tipo">conteúdo</x-slot>
@@ -75,7 +75,7 @@
         @endif
     </div>
 
-    <!-- Modal para exibir o vídeo -->
+    <!-- Modal para exibir vídeo -->
     <div id="videoModal" class="modal fade" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -84,10 +84,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
-                    <video id="videoPlayer" controls style="width: 100%;">
-                        <source src="" type="video/mp4">
-                        Seu navegador não suporta o elemento de vídeo.
-                    </video>
+                    <!-- Para YouTube ou vídeos locais -->
+                    <div id="videoContainer"></div>
                 </div>
             </div>
         </div>
@@ -102,14 +100,38 @@
     {{ $contents->links() }}
 
     <script>
-        // Função para exibir o modal com o vídeo
+        // Função para exibir o modal de vídeo
         function showVideo(link) {
-            // Define o link do vídeo no player do modal
-            document.getElementById('videoPlayer').src = link;
+            const videoContainer = document.getElementById('videoContainer');
+            let videoHtml = '';
+
+            if (link.includes('youtube.com') || link.includes('youtu.be')) {
+                // Embed de vídeo do YouTube
+                const videoId = link.split('v=')[1]?.split('&')[0] || link.split('/').pop();
+                videoHtml = `
+                    <iframe 
+                        width="100%" 
+                        height="400" 
+                        src="https://www.youtube.com/embed/${videoId}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>`;
+            } else {
+                // Vídeo local (MP4)
+                videoHtml = `
+                    <video controls style="width: 100%;">
+                        <source src="${link}" type="video/mp4">
+                        Seu navegador não suporta o elemento de vídeo.
+                    </video>`;
+            }
+
+            // Insere o player no modal
+            videoContainer.innerHTML = videoHtml;
+
             // Exibe o modal
-            var videoModal = new bootstrap.Modal(document.getElementById('videoModal'));
+            const videoModal = new bootstrap.Modal(document.getElementById('videoModal'));
             videoModal.show();
         }
     </script>
 @endsection
-
