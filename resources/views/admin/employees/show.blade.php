@@ -19,10 +19,10 @@
             </thead>
             <tbody>
                 <tr class="align-middle">
-                    <th class="text-center">???</th>
-                    <td class="text-center">???</td>
-                    <td class="text-center">???</td>
-                    <td class="text-center">???</td>
+                    <th class="text-center">{{ $employee->id }}</th>
+                    <td class="text-center">{{ $employee->name }}</td>
+                    <td class="text-center">{{ $employee->role }}</td>
+                    <td class="text-center">{{ $employee->department->name }}</td>
                 </tr>
             </tbody>
         </table>
@@ -42,19 +42,24 @@
         new Chart(ctx, {
             type: 'line',
             data: {
-                // Aqui entra as datas as avaliações do funcionário
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: 'Média',
-                    // Aqui entra a média de cada avaliação
-                    data: [5, 3, 4, 1, 2, 4],
-                    borderWidth: 3
-                }]
-            },
+            labels: <?php echo json_encode($labels); ?>,  // Data (labels)
+            datasets: [{
+                label: 'Média',
+                // Dados das médias gerados dinamicamente no PHP
+                data: <?php echo json_encode($data); ?>,  // Médias
+                borderWidth: 3
+            }]
+        },
             options: {
                 plugins: {
                     legend: {
                         display: false,
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 1,
+                        max: 5,
                     }
                 }
             }

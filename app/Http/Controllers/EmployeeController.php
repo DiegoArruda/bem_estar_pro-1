@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -54,7 +56,38 @@ class EmployeeController extends Controller
      */
     public function show(int $id)
     {
-        return view('admin.employees.show');
+        $employee = Employee::find($id);
+        $userId = $id; // Substitua pelo ID do funcionário desejado
+
+        $questionnaireDates = DB::table('test_questions')
+    // Junta com a tabela 'tests' para pegar o 'test_id'
+            ->join('tests', 'test_questions.test_id', '=', 'tests.id')
+    // Junta com a tabela 'employees' para filtrar pelo 'employee_id'
+            ->join('employees', 'tests.employee_id', '=', 'employees.id')
+    // Junta com a tabela 'options' para calcular a média dos pesos das opções
+            ->join('options', 'test_questions.option_id', '=', 'options.id')
+    // Seleciona a data de criação do questionário e a média das opções
+            ->select('test_questions.created_at', DB::raw('AVG(options.weight) as averageScore'))
+    // Filtra pelo 'employee_id' do funcionário
+            ->where('employees.id', $id)
+    // Agrupa por 'test_id' para calcular a média de cada questionário
+            ->groupBy('test_questions.test_id', 'test_questions.created_at')
+    // Ordena pelas datas de criação do questionário (do mais antigo para o mais recente)
+            ->orderBy('test_questions.created_at', 'asc')
+            ->get();
+
+            // Arrays para as labels (datas) e data (média)
+        $labels = [];
+        $data = [];
+
+// Preenche os arrays
+        foreach ($questionnaireDates as $item) {
+            $labels[] = Carbon::parse($item->created_at)->format('d-m-Y'); // Data formatada
+            $data[] = $item->averageScore; // Média de cada avaliação
+}
+
+
+        return view('admin.employees.show', compact('employee', 'labels', 'data'));
     }
 
     /**
