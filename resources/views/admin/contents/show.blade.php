@@ -8,7 +8,6 @@
 <body>
     <h1>{{ $content->title }}</h1>
     <p>Link armazenado: {{ $content->link }}</p>
-    <p>Debug: {{ $content->link }}</p>
 
     <!-- Exibir o vídeo do YouTube -->
     @if($videoId)
@@ -22,3 +21,5 @@
     @endif
 </body>
 </html>
+
+

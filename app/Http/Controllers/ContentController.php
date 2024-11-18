@@ -62,6 +62,8 @@ class ContentController extends Controller
 
     
 
+    
+
     public function edit(int $id)
     {
         $content = Content::find($id);
@@ -94,4 +96,3 @@ class ContentController extends Controller
         return redirect()->route('contents.index')->with('success', 'Conteúdo excluído com sucesso.');
     }
 }
-
