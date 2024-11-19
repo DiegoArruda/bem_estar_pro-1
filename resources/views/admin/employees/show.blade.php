@@ -30,7 +30,7 @@
 
     <h2 class="fs-4 mb-4">Gráfico de avaliações</h2>
 
-    <section class="grafico-avaliacoes mb-5 bg-light p-3 rounded-3">
+    <section class="grafico-avaliacoes mb-5 bg-light p-4 rounded-3">
         <canvas id="myChart" style="width: 100%; height: 300px;"></canvas>
     </section>
 
@@ -69,42 +69,50 @@
     <h2 class="fs-4 mb-4">Histório de avaliações</h2>
 
     <section class="historico-avaliacoes mb-5 bg-light p-3 rounded-4">
-        <p><b>Data da avaliação:</b> 00/00/0000</p>
         <table class="table">
             <thead class="table-secondary">
                 <tr class="text-center">
-                    <th>Questões</th>
-                    <th>Opção</th>
+                    <th>Data avaliação</th>
+                    <th>Média</th>
+                    <th width="80">Ação</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="align-middle">
-                    <td>Como você avalia o seu estado emocional atualmente?</td>
+                    <td>00/00/0000</td>
                     <td><img src="/images/icon_5.png"> Muito Satisfeito</td>
+                    <td>
+                        <a href="#" title="Detalhar" class="btn btn-primary">
+                            <i class="bi bi-card-list"></i>
+                        </a>
+                    </td>
                 </tr>
                 <tr class="align-middle">
-                    <td>Qual é a sua percepção sobre o equilíbrio entre vida pessoal e profissional?</td>
+                    <td>00/00/0000</td>
                     <td><img src="/images/icon_4.png"> Satisfeito</td>
+                    <td>
+                        <a href="#" title="Detalhar" class="btn btn-primary">
+                            <i class="bi bi-card-list"></i>
+                        </a>
+                    </td>
                 </tr>
                 <tr class="align-middle">
-                    <td>Como você avalia o impacto do ambiente de trabalho na sua saúde mental?</td>
+                    <td>00/00/0000</td>
                     <td><img src="/images/icon_3.png"> Neutro</td>
+                    <td>
+                        <a href="#" title="Detalhar" class="btn btn-primary">
+                            <i class="bi bi-card-list"></i>
+                        </a>
+                    </td>
                 </tr>
                 <tr class="align-middle">
-                    <td>Como você avalia seu estado emocional ao final do expediente?</td>
+                    <td>00/00/0000</td>
                     <td><img src="/images/icon_2.png"> Insatisfeito</td>
-                </tr>
-                <tr class="align-middle">
-                    <td>Como você avalia o seu nível de bem-estar com seu superior imediato?</td>
-                    <td><img src="/images/icon_2.png"> Insatisfeito</td>
-                </tr>
-                <tr class="align-middle">
-                    <td>Como você avalia o seu nível de bem-estar com a equipe?</td>
-                    <td><img src="/images/icon_1.png"> Muito insatisfeito</td>
-                </tr>
-                <tr class="align-middle">
-                    <td><b>Média</b></td>
-                    <td><b>0.0</b></td>
+                    <td>
+                        <a href="#" title="Detalhar" class="btn btn-primary">
+                            <i class="bi bi-card-list"></i>
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>

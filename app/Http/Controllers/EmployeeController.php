@@ -15,7 +15,7 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        $employees = Employee::where('name', 'like','%'.$request->busca.'%')->orderBy('name', 'asc')->paginate(10);
+        $employees = Employee::where('name', 'like', '%' . $request->busca . '%')->orderBy('name', 'asc')->paginate(10);
 
         $totalEmployees = Employee::all()->count();
 
@@ -48,7 +48,7 @@ class EmployeeController extends Controller
         // Insert de dados do usuário no banco
         Employee::create($input);
 
-        return redirect()->route('employees.index')->with('success','Funcionário cadastrado com sucesso');
+        return redirect()->route('employees.index')->with('success', 'Funcionário cadastrado com sucesso');
     }
 
     /**
@@ -60,32 +60,31 @@ class EmployeeController extends Controller
         $userId = $id; // Substitua pelo ID do funcionário desejado
 
         $questionnaireDates = DB::table('test_questions')
-    // Junta com a tabela 'tests' para pegar o 'test_id'
+            // Junta com a tabela 'tests' para pegar o 'test_id'
             ->join('tests', 'test_questions.test_id', '=', 'tests.id')
-    // Junta com a tabela 'employees' para filtrar pelo 'employee_id'
+            // Junta com a tabela 'employees' para filtrar pelo 'employee_id'
             ->join('employees', 'tests.employee_id', '=', 'employees.id')
-    // Junta com a tabela 'options' para calcular a média dos pesos das opções
+            // Junta com a tabela 'options' para calcular a média dos pesos das opções
             ->join('options', 'test_questions.option_id', '=', 'options.id')
-    // Seleciona a data de criação do questionário e a média das opções
+            // Seleciona a data de criação do questionário e a média das opções
             ->select('test_questions.created_at', DB::raw('AVG(options.weight) as averageScore'))
-    // Filtra pelo 'employee_id' do funcionário
+            // Filtra pelo 'employee_id' do funcionário
             ->where('employees.id', $id)
-    // Agrupa por 'test_id' para calcular a média de cada questionário
+            // Agrupa por 'test_id' para calcular a média de cada questionário
             ->groupBy('test_questions.test_id', 'test_questions.created_at')
-    // Ordena pelas datas de criação do questionário (do mais antigo para o mais recente)
+            // Ordena pelas datas de criação do questionário (do mais antigo para o mais recente)
             ->orderBy('test_questions.created_at', 'asc')
             ->get();
 
-            // Arrays para as labels (datas) e data (média)
+        // Arrays para as labels (datas) e data (média)
         $labels = [];
         $data = [];
 
-// Preenche os arrays
+        // Preenche os arrays
         foreach ($questionnaireDates as $item) {
             $labels[] = Carbon::parse($item->created_at)->format('d-m-Y'); // Data formatada
-            $data[] = $item->averageScore; // Média de cada avaliação
-}
-
+            $data[] = round($item->averageScore, 1); // Média de cada avaliação
+        }
 
         return view('admin.employees.show', compact('employee', 'labels', 'data'));
     }
@@ -97,13 +96,13 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
 
-        if(!$employee){
+        if (!$employee) {
             return back();
         }
 
         $departments = Department::all()->sortBy('nome');
 
-        return view('admin.employees.edit', compact('employee','departments'));
+        return view('admin.employees.edit', compact('employee', 'departments'));
     }
 
     /**
@@ -117,7 +116,7 @@ class EmployeeController extends Controller
 
         $employee->fill($input);
         $employee->save();
-        return redirect()->route('employees.index')->with('success','Funcionário alterado com sucesso!');
+        return redirect()->route('employees.index')->with('success', 'Funcionário alterado com sucesso!');
     }
 
     /**
@@ -130,6 +129,6 @@ class EmployeeController extends Controller
         // Apagando o registro no banco de dados
         $employee->delete();
 
-        return redirect()->route('employees.index')->with('success','Funcionário exluído com sucesso.');
+        return redirect()->route('employees.index')->with('success', 'Funcionário exluído com sucesso.');
     }
 }

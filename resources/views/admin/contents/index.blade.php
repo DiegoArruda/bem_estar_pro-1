@@ -29,7 +29,7 @@
                     <th scope="col">Título</th>
                     <th scope="col">Link</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col" width="150px">Ações</th>
+                    <th scope="col" width="180px">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -109,12 +109,12 @@
                 // Embed de vídeo do YouTube
                 const videoId = link.split('v=')[1]?.split('&')[0] || link.split('/').pop();
                 videoHtml = `
-                    <iframe 
-                        width="100%" 
-                        height="400" 
-                        src="https://www.youtube.com/embed/${videoId}" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    <iframe
+                        width="100%"
+                        height="400"
+                        src="https://www.youtube.com/embed/${videoId}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen>
                     </iframe>`;
             } else {
