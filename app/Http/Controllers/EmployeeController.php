@@ -67,7 +67,7 @@ class EmployeeController extends Controller
             // Junta com a tabela 'options' para calcular a média dos pesos das opções
             ->join('options', 'test_questions.option_id', '=', 'options.id')
             // Seleciona a data de criação do questionário e a média das opções
-            ->select('test_questions.created_at', DB::raw('AVG(options.weight) as averageScore'))
+            ->select('tests.id', 'test_questions.created_at', DB::raw('AVG(options.weight) as averageScore'))
             // Filtra pelo 'employee_id' do funcionário
             ->where('employees.id', $id)
             // Agrupa por 'test_id' para calcular a média de cada questionário
@@ -77,16 +77,23 @@ class EmployeeController extends Controller
             ->get();
 
         // Arrays para as labels (datas) e data (média)
-        $labels = [];
-        $data = [];
+        $datas = [];
+        $medias = [];
+        $id_test = [];
 
         // Preenche os arrays
         foreach ($questionnaireDates as $item) {
-            $labels[] = Carbon::parse($item->created_at)->format('d-m-Y'); // Data formatada
-            $data[] = round($item->averageScore, 1); // Média de cada avaliação
+            $datas[] = Carbon::parse($item->created_at)->format('d-m-Y'); // Data formatada
+            $medias[] = round($item->averageScore, 1); // Média de cada avaliação
         }
 
-        return view('admin.employees.show', compact('employee', 'labels', 'data'));
+        return view('admin.employees.show', compact('employee', 'datas', 'medias', 'questionnaireDates'));
+    }
+
+    public function test_details(int $id)
+    {
+
+        return view('admin.employees.test_details');
     }
 
     /**

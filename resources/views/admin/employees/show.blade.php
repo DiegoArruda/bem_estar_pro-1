@@ -42,11 +42,11 @@
         new Chart(ctx, {
             type: 'line',
             data: {
-            labels: <?php echo json_encode($labels); ?>,  // Data (labels)
+            labels: <?php echo json_encode($datas); ?>,  // Data (labels)
             datasets: [{
                 label: 'Média',
                 // Dados das médias gerados dinamicamente no PHP
-                data: <?php echo json_encode($data); ?>,  // Médias
+                data: <?php echo json_encode($medias); ?>,  // Médias
                 borderWidth: 3
             }]
         },
@@ -78,42 +78,20 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($questionnaireDates as $test)
                 <tr class="align-middle">
-                    <td>00/00/0000</td>
-                    <td><img src="/images/icon_5.png"> Muito Satisfeito</td>
+                    <td>{{ $test->created_at }}</td>
                     <td>
-                        <a href="#" title="Detalhar" class="btn btn-primary">
+                        {{ $test->averageScore }}
+                        <img src="/images/icon_1.png"> Muito Satisfeito
+                    </td>
+                    <td>
+                        <a href="{{ route('employees.test.details', $test->id) }}" title="Detalhar" class="btn btn-primary">
                             <i class="bi bi-card-list"></i>
                         </a>
                     </td>
                 </tr>
-                <tr class="align-middle">
-                    <td>00/00/0000</td>
-                    <td><img src="/images/icon_4.png"> Satisfeito</td>
-                    <td>
-                        <a href="#" title="Detalhar" class="btn btn-primary">
-                            <i class="bi bi-card-list"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr class="align-middle">
-                    <td>00/00/0000</td>
-                    <td><img src="/images/icon_3.png"> Neutro</td>
-                    <td>
-                        <a href="#" title="Detalhar" class="btn btn-primary">
-                            <i class="bi bi-card-list"></i>
-                        </a>
-                    </td>
-                </tr>
-                <tr class="align-middle">
-                    <td>00/00/0000</td>
-                    <td><img src="/images/icon_2.png"> Insatisfeito</td>
-                    <td>
-                        <a href="#" title="Detalhar" class="btn btn-primary">
-                            <i class="bi bi-card-list"></i>
-                        </a>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </section>

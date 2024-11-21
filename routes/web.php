@@ -59,6 +59,7 @@ Route::prefix('admin')->controller(EmployeeController::class)->middleware('verif
     Route::put('employees/{id}', 'update')->name('employees.update');
     Route::delete('employees/{id}', 'destroy')->name('employees.destroy');
     Route::get('employees/{id}', 'show')->name('employees.show');
+    Route::get('test_details/{id}', 'test_details')->name('employees.test.details');
 });
 
 Route::prefix('admin')->controller(UserController::class)->middleware('verifyuser')->group(function () {
