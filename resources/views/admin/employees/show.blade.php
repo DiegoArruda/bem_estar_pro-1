@@ -80,7 +80,7 @@
             <tbody>
                 @foreach ($questionnaireDates as $test)
                 <tr class="align-middle">
-                    <td>{{ $test->created_at }}</td>
+                    <td>{{ date('d/m/Y', strtotime($test->created_at)) }}</td>
                     <td>
                         {{ $test->averageScore }}
                         <img src="/images/icon_1.png"> Muito Satisfeito
