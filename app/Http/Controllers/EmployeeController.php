@@ -57,7 +57,6 @@ class EmployeeController extends Controller
     public function show(int $id)
     {
         $employee = Employee::find($id);
-        $userId = $id; // Substitua pelo ID do funcionário desejado
 
         $questionnaireDates = DB::table('test_questions')
             // Junta com a tabela 'tests' para pegar o 'test_id'
@@ -67,19 +66,18 @@ class EmployeeController extends Controller
             // Junta com a tabela 'options' para calcular a média dos pesos das opções
             ->join('options', 'test_questions.option_id', '=', 'options.id')
             // Seleciona a data de criação do questionário e a média das opções
-            ->select('tests.id', 'test_questions.created_at', DB::raw('AVG(options.weight) as averageScore'))
+            ->select('tests.id', 'tests.created_at', DB::raw('AVG(options.weight) as averageScore'))
             // Filtra pelo 'employee_id' do funcionário
             ->where('employees.id', $id)
             // Agrupa por 'test_id' para calcular a média de cada questionário
-            ->groupBy('test_questions.test_id', 'test_questions.created_at')
+            ->groupBy('tests.id', 'tests.created_at')
             // Ordena pelas datas de criação do questionário (do mais antigo para o mais recente)
-            ->orderBy('test_questions.created_at', 'asc')
+            ->orderBy('tests.created_at', 'asc')
             ->get();
 
         // Arrays para as labels (datas) e data (média)
         $datas = [];
         $medias = [];
-        $id_test = [];
 
         // Preenche os arrays
         foreach ($questionnaireDates as $item) {
