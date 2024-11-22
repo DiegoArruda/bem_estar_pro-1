@@ -81,7 +81,7 @@ class EmployeeController extends Controller
 
         // Preenche os arrays
         foreach ($questionnaireDates as $item) {
-            $datas[] = Carbon::parse($item->created_at)->format('d-m-Y'); // Data formatada
+            $datas[] = Carbon::parse($item->created_at)->format('d/m/Y'); // Data formatada
             $medias[] = round($item->averageScore, 1); // Média de cada avaliação
         }
 
