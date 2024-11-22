@@ -100,7 +100,7 @@
                         }
                     @endphp
                 <tr class="align-middle">
-                    <td>{{ $test->created_at }}</td>
+                    <td>{{ date('d/m/Y', strtotime($test->created_at)) }}</td>
                     <td>
                         {{ number_format($test->averageScore, 2) }}
                         <img src="{{$icon}}" alt="{{$label}}" class="ms-2"> {{$label}}
