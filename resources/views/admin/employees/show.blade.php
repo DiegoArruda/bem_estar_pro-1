@@ -79,11 +79,31 @@
             </thead>
             <tbody>
                 @foreach ($questionnaireDates as $test)
+                    @php
+                        if ($test->averageScore >= 4.0) {
+                            $icon = '/images/icon_5.png';
+                            $label = 'Muito Satisfeito';
+                        }elseif ($test->averageScore >= 3.0) {
+                            $icon = '/images/icon_4.png';
+                            $label = 'Satisfeito';
+                        }elseif ($test->averageScore >= 2.5) {
+                            $icon = '/images/icon_3.png';
+                            $label = 'Neutro';
+                        }elseif ($test->averageScore >= 1.5) {
+                            $icon = '/images/icon_2.png';
+                            $label = 'Insatisfeito';
+                        }elseif ($test->averageScore >= 1.0) {
+                            $icon = '/images/icon_1.png';
+                            $label = 'Muito Insatisfeito';
+                        }else{
+                           $label = 'Sem Avaliação'; 
+                        }
+                    @endphp
                 <tr class="align-middle">
                     <td>{{ date('d/m/Y', strtotime($test->created_at)) }}</td>
                     <td>
-                        {{ $test->averageScore }}
-                        <img src="/images/icon_1.png"> Muito Satisfeito
+                        {{ number_format($test->averageScore, 2) }}
+                        <img src="{{$icon}}" alt="{{$label}}" class="ms-2"> {{$label}}
                     </td>
                     <td>
                         <a href="{{ route('employees.test.details', $test->id) }}" title="Detalhar" class="btn btn-primary">
