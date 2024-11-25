@@ -13,7 +13,7 @@
 <body class="d-flex flex-nowrap min-vh-100">
     <x-sidebar/>
     <main class="container-fluid p-4 bg-light">
-        <div class="bg-white p-4 shadow h-100 position-relative rounded-4">
+        <div class="bg-white p-4 shadow h-100 position-relative rounded-4" id="content">
             @yield('content')
         </div>
     </main>

@@ -44,6 +44,18 @@
     background-color: #aaf6fc;
 }
 
+#content h1 {
+    color: #229799;
+}
+
+#content h1::after {
+    content: "";
+    display: block;
+    width: 50px;
+    border-bottom: 5px solid #229799;
+    margin-top: 5px;
+}
+
 .dashboard {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
