@@ -3,7 +3,7 @@
 @section('title', 'BemEstar Pro - Questionário')
 
 @section('content')
-    <h1 class="fs-2 mb-5 text-center">Olá {{ session('name') }} como você sente hoje?</h1>
+    <h1 class="fs-2 mb-5 text-center">Olá, {{ session('name') }}! como você sente hoje?</h1>
 
     {{-- Exibição de mensagem de sucesso --}}
     @if (session('success'))
