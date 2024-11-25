@@ -58,20 +58,13 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
 
-        $questionnaireDates = DB::table('test_questions')
-            // Junta com a tabela 'tests' para pegar o 'test_id'
+        $testsEmployee = DB::table('test_questions')
             ->join('tests', 'test_questions.test_id', '=', 'tests.id')
-            // Junta com a tabela 'employees' para filtrar pelo 'employee_id'
             ->join('employees', 'tests.employee_id', '=', 'employees.id')
-            // Junta com a tabela 'options' para calcular a média dos pesos das opções
             ->join('options', 'test_questions.option_id', '=', 'options.id')
-            // Seleciona a data de criação do questionário e a média das opções
             ->select('tests.id', 'tests.created_at', DB::raw('AVG(options.weight) as averageScore'))
-            // Filtra pelo 'employee_id' do funcionário
             ->where('employees.id', $id)
-            // Agrupa por 'test_id' para calcular a média de cada questionário
             ->groupBy('tests.id', 'tests.created_at')
-            // Ordena pelas datas de criação do questionário (do mais antigo para o mais recente)
             ->orderBy('tests.created_at', 'asc')
             ->get();
 
@@ -80,28 +73,42 @@ class EmployeeController extends Controller
         $medias = [];
 
         // Preenche os arrays
-        foreach ($questionnaireDates as $item) {
-            $datas[] = Carbon::parse($item->created_at)->format('d/m/Y'); // Data formatada
-            $medias[] = round($item->averageScore, 1); // Média de cada avaliação
+        foreach ($testsEmployee as $test) {
+            $datas[] = Carbon::parse($test->created_at)->format('d/m/Y'); // Data formatada
+            $medias[] = round($test->averageScore, 1); // Média de cada avaliação
         }
 
-        return view('admin.employees.show', compact('employee', 'datas', 'medias', 'questionnaireDates'));
+        return view('admin.employees.show', compact('employee', 'datas', 'medias', 'testsEmployee'));
     }
 
     public function test_details(int $id)
     {
-
-        $test = DB::table('questions')
-            ->join('test_questions', 'test_questions.question_id', '=', 'questions.id')
-            ->join('tests', 'test_questions.test_id', '=', 'tests.id')
+        $test = DB::table('tests')
             ->join('employees', 'tests.employee_id', '=', 'employees.id')
+            ->select('employees.name', 'tests.created_at', 'tests.comment')
+            ->where('tests.id', $id)
+            ->get();
+
+        $questions = DB::table('tests')
+            ->join('test_questions', 'test_questions.test_id', '=', 'tests.id')
+            ->join('questions', 'test_questions.question_id', '=', 'questions.id')
             ->join('options', 'test_questions.option_id', '=', 'options.id')
-            ->select('employees.name', 'tests.created_at', 'questions.description', 'options.weight')
+            ->select('questions.description', 'options.weight')
             ->where('tests.id', $id)
             ->orderBy('questions.id', 'asc')
             ->get();
 
-        return view('admin.employees.test_details', compact('test'));
+        $average = 0;
+        $totalQuestions = 0;
+
+        foreach ($questions as $question) {
+            $average = $average + $question->weight;
+            $totalQuestions++;
+        }
+
+        $average = round($average / $totalQuestions, 1);
+
+        return view('admin.employees.test_details', compact('test', 'questions', 'average'));
     }
 
     /**

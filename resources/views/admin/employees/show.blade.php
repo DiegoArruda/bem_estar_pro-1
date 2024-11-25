@@ -73,12 +73,12 @@
             <thead class="table-secondary">
                 <tr class="text-center">
                     <th>Data avaliação</th>
-                    <th>Média</th>
+                    <th width="250">Média</th>
                     <th width="80">Ação</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($questionnaireDates as $test)
+                @foreach ($testsEmployee as $test)
                     @php
                         if ($test->averageScore >= 4.0) {
                             $icon = '/images/icon_5.png';
@@ -96,14 +96,13 @@
                             $icon = '/images/icon_1.png';
                             $label = 'Muito Insatisfeito';
                         }else{
-                           $label = 'Sem Avaliação'; 
+                           $label = 'Sem Avaliação';
                         }
                     @endphp
                 <tr class="align-middle">
                     <td>{{ date('d/m/Y', strtotime($test->created_at)) }}</td>
                     <td>
-                        {{ number_format($test->averageScore, 2) }}
-                        <img src="{{$icon}}" alt="{{$label}}" class="ms-2"> {{$label}}
+                        <img src="{{$icon}}" alt="{{$label}}"> {{$label}} ({{ number_format($test->averageScore, 1) }})
                     </td>
                     <td>
                         <a href="{{ route('employees.test.details', $test->id) }}" title="Detalhar" class="btn btn-primary">
