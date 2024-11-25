@@ -58,6 +58,14 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
 
+        // Adiciona o cálculo da idade baseado no campo `date_birth`
+    $age = null;
+    if ($employee->date_birth) {
+        $birthDate = new \DateTime($employee->date_birth);
+        $today = new \DateTime();
+        $age = $today->diff($birthDate)->y; // Calcula a idade
+    }
+
         $testsEmployee = DB::table('test_questions')
             ->join('tests', 'test_questions.test_id', '=', 'tests.id')
             ->join('employees', 'tests.employee_id', '=', 'employees.id')
@@ -78,7 +86,7 @@ class EmployeeController extends Controller
             $medias[] = round($test->averageScore, 1); // Média de cada avaliação
         }
 
-        return view('admin.employees.show', compact('employee', 'datas', 'medias', 'testsEmployee'));
+        return view('admin.employees.show', compact('employee', 'datas', 'medias', 'testsEmployee','age'));
     }
 
     public function test_details(int $id)

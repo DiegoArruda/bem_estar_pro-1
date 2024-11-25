@@ -33,23 +33,41 @@ class TestController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $input = $request->all();
-        $input['employee_id'] = session('id');
-        $test = Test::create($input);
+{
+    // Obtenha todas as perguntas ativas
+    $questions = Question::where('status', 'on')->orderBy('id', 'desc')->get();
 
-        $questions = Question::where('status', 'on')->orderBy('id', 'desc')->get();
+    // Crie regras de validação dinamicamente
+    $rules = [];
+    $messages = [];
 
-        foreach($questions AS $question){
-            $input['question_id'] = $input['question-'.$question->id];
-            $input['option_id'] = $input['question-option-'.$question->id];
-            $input['test_id'] = $test['id'];
-            // echo  $input['employee_id']."-".$input['question_id']."-".$input['option_id'].'<br>';
-            TestQuestion::create($input);
-        }
+    foreach ($questions as $question) {
+        $rules["question-{$question->id}"] = 'required'; // Cada questão é obrigatória
+        $rules["question-option-{$question->id}"] = 'required'; // Cada opção também é obrigatória
 
-        return redirect()->route('home.tests.index')->with('success', 'Avaliação realizada com sucesso!');
+        $messages["question-{$question->id}.required"] = "Por favor, selecione uma resposta para a questão '{$question->description}'.";
+        $messages["question-option-{$question->id}.required"] = "Por favor, escolha uma opção para a questão '{$question->description}'.";
     }
+
+    // Realize a validação
+    $validated = $request->validate($rules, $messages);
+
+    // Se a validação passar, prossiga para salvar os dados
+    $input = $request->all();
+    $input['employee_id'] = session('id');
+
+    $test = Test::create($input);
+
+    foreach ($questions as $question) {
+        TestQuestion::create([
+            'test_id' => $test->id,
+            'question_id' => $request->input("question-{$question->id}"),
+            'option_id' => $request->input("question-option-{$question->id}"),
+        ]);
+    }
+
+    return redirect()->route('home.tests.index')->with('success', 'Avaliação realizada com sucesso!');
+}
 
     /**
      * Display the specified resource.

@@ -5,7 +5,7 @@
 @section('content')
     <h1 class="fs-2 mb-4">Histório de funcionário</h1>
 
-    <h2 class="fs-5 mb-4">Nome do funcionário</h2>
+    <h2 class="fs-5 mb-4">{{ $employee->name }}</h2>
 
     <section class="dados-funcionario">
         <table class="table mb-5">
@@ -20,7 +20,9 @@
             <tbody>
                 <tr class="align-middle">
                     <th class="text-center">{{ $employee->id }}</th>
-                    <td class="text-center">{{ $employee->name }}</td>
+                    <td class="text-center">
+                        {{ $age ? $age . ' anos' : 'Não informada' }}
+                    </td>
                     <td class="text-center">{{ $employee->role }}</td>
                     <td class="text-center">{{ $employee->department->name }}</td>
                 </tr>
