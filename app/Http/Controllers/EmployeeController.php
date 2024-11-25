@@ -91,7 +91,17 @@ class EmployeeController extends Controller
     public function test_details(int $id)
     {
 
-        return view('admin.employees.test_details');
+        $test = DB::table('questions')
+            ->join('test_questions', 'test_questions.question_id', '=', 'questions.id')
+            ->join('tests', 'test_questions.test_id', '=', 'tests.id')
+            ->join('employees', 'tests.employee_id', '=', 'employees.id')
+            ->join('options', 'test_questions.option_id', '=', 'options.id')
+            ->select('employees.name', 'tests.created_at', 'questions.description', 'options.weight')
+            ->where('tests.id', $id)
+            ->orderBy('questions.id', 'asc')
+            ->get();
+
+        return view('admin.employees.test_details', compact('test'));
     }
 
     /**
